@@ -218,4 +218,5 @@ Bhramand Nayak tumhari sahayta zarur karega
   }
 });
 
+console.log(process.env.TOKEN);
 client.login(process.env.TOKEN);
