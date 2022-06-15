@@ -100,11 +100,11 @@ client.on("ready", setSchedules);
 
 client.on("messageCreate", async (msg) => {
   if (msg.author.bot) return;
-  if (msg.content === "!status") {
+  if (msg.content === "&status") {
     msg.reply("Bhramand Nayak sadha tumharey sat ha");
   }
 
-  if (msg.content === "!inspire") {
+  if (msg.content === "&inspire") {
     const quote = await getQuote();
     const thought =
       foodForThoughts[Math.floor(Math.random() * foodForThoughts.length)];
@@ -113,7 +113,7 @@ client.on("messageCreate", async (msg) => {
 ${thought}, ${msg.author.username}!`);
   }
 
-  if (msg.content.toLowerCase().startsWith("!remind")) {
+  if (msg.content.toLowerCase().startsWith("&remind")) {
     let message = msg;
     try {
       // Variables
@@ -127,6 +127,7 @@ ${thought}, ${msg.author.username}!`);
       );
 
       // Sets the userid for the recipiant
+      const reciever = msg[1];
       const userObj = client.users.cache.get(
         msg[1].replace("<@", "").slice(0, -1)
       );
@@ -165,10 +166,21 @@ ${thought}, ${msg.author.username}!`);
         const [_, __, ___, ____, ...remaing] = msg;
 
         const content = remaing.join().replaceAll(",", " ");
-        message.channel.send(`<@${userObj.id}>! ${content}`);
-        console.log(
-          "Message sent to " + userObj.username + " at " + Date.now().toString()
-        );
+        if (userObj) {
+          message.channel.send(`<@${userObj.id}>! ${content}`);
+          console.log(
+            "Message sent to " +
+              userObj.username +
+              " at " +
+              Date.now().toString()
+          );
+        } else {
+          message.channel.send(`${reciever}! ${content}`);
+          console.log(
+            "Message sent to " + reciever + " at " + Date.now().toString()
+          );
+        }
+
         //Code
       }, returntime);
     } catch (e) {
@@ -177,8 +189,8 @@ ${thought}, ${msg.author.username}!`);
       );
       console.error(e.toString());
     }
-  } else if (msg.content.toLowerCase().startsWith("!horoscope")) {
-    const sign = msg.content.split(" ")[1];
+  } else if (msg.content.toLowerCase().startsWith("&horoscope")) {
+    const sign = msg.content.split(" ")[1].toLowerCase();
 
     const allSigns = sunSigns.map((x) => x.name);
     if (allSigns.includes(sign)) {
@@ -189,7 +201,7 @@ ${thought}, ${msg.author.username}!`);
     }
   }
 
-  if (msg.content === "!signs") {
+  if (msg.content === "&signs") {
     const signs = sunSigns.reverse().reduce(
       (prev, curr) => `- ${curr.name} : ${curr.date}
 ${prev}`,
@@ -200,13 +212,13 @@ ${prev}`,
     msg.channel.send(signs);
   }
 
-  if (msg.content === "!halp") {
+  if (msg.content === "&halp") {
     const halp = `
 Bhramand Nayak tumhari sahayta zarur karega
-!status - to know the status of the bot
-!remind - set a reminder. Use the format !remind <@person> <number> <duration> <reminder message>. for setting a duration, use s for second, m for minute, h for hour and d for days. Sample - !remind @mohan 1 s you forgot to write help command !
-!horoscope <sun sign> - to get todays horoscope for the given sun sign.
-!signs - to get the list of sun signs and the dates for the respective signs. You can find which sign you belong to using this command
+&status - to know the status of the bot
+&remind - set a reminder. Use the format !remind <@person> <number> <duration> <reminder message>. for setting a duration, use s for second, m for minute, h for hour and d for days. Sample - &&&&remind @mohan 1 s you forgot to write help command !
+&horoscope <sun sign> - to get todays horoscope for the given sun sign.
+&signs - to get the list of sun signs and the dates for the respective signs. You can find which sign you belong to using this command
     `;
 
     msg.channel.send(halp);
