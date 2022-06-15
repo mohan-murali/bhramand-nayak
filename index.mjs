@@ -224,7 +224,7 @@ Bhramand Nayak tumhari sahayta zarur karega
     msg.channel.send(halp);
   }
 
-  if (msg.content === "!joke") {
+  if (msg.content === "&joke") {
     const joke = await getJoke();
     msg.channel.send(joke);
   }
