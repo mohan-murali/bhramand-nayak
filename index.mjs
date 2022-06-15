@@ -216,7 +216,7 @@ ${prev}`,
     const halp = `
 Bhramand Nayak tumhari sahayta zarur karega
 &status - to know the status of the bot
-&remind - set a reminder. Use the format !remind <@person> <number> <duration> <reminder message>. for setting a duration, use s for second, m for minute, h for hour and d for days. Sample - &&&&remind @mohan 1 s you forgot to write help command !
+&remind - set a reminder. Use the format &remind <@person> <number> <duration> <reminder message>. for setting a duration, use s for second, m for minute, h for hour and d for days. Sample - &remind @mohan 1 s you forgot to write help command !
 &horoscope <sun sign> - to get todays horoscope for the given sun sign.
 &signs - to get the list of sun signs and the dates for the respective signs. You can find which sign you belong to using this command
     `;
