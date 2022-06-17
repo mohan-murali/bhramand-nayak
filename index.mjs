@@ -46,9 +46,8 @@ async function getQuote() {
 
 const getHoroscope = async (sign) => {
   try {
-    const res = await fetch(`	https://ohmanda.com/api/horoscope/${sign}`);
+    const res = await fetch(`https://ohmanda.com/api/horoscope/${sign}`);
     const data = await res.json();
-    console.log(data);
     return data.horoscope;
   } catch (ex) {
     console.log(ex);
@@ -88,7 +87,6 @@ const getJoke = async () => {
       headers: { Accept: "application/json" },
     });
     const { joke } = await res.json();
-    console.log(joke);
     return joke;
   } catch (ex) {
     console.log(ex);
@@ -132,7 +130,6 @@ ${thought}, ${msg.author.username}!`);
         msg[1].replace("<@", "").slice(0, -1)
       );
 
-      console.log(userObj);
       const timemeasure = msg[3];
       returntime = msg[2];
 
@@ -167,7 +164,7 @@ ${thought}, ${msg.author.username}!`);
 
         const content = remaing.join().replaceAll(",", " ");
         if (userObj) {
-          message.channel.send(`<@${userObj.id}>! ${content}`);
+          message.channel.send(`<@${userObj.id}> ${content}`);
           console.log(
             "Message sent to " +
               userObj.username +
@@ -175,7 +172,7 @@ ${thought}, ${msg.author.username}!`);
               Date.now().toString()
           );
         } else {
-          message.channel.send(`${reciever}! ${content}`);
+          message.channel.send(`${reciever} ${content}`);
           console.log(
             "Message sent to " + reciever + " at " + Date.now().toString()
           );
