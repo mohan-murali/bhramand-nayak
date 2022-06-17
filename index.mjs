@@ -48,7 +48,8 @@ const getHoroscope = async (sign) => {
   try {
     const res = await fetch(`https://ohmanda.com/api/horoscope/${sign}`);
     const data = await res.json();
-    return data.horoscope;
+    return `Horoscope for ${data.sign} on ${data.date} :
+${data.horoscope}`;
   } catch (ex) {
     console.log(ex);
     return "Dal me kuch kala h. Hum dekhte h";
