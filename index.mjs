@@ -56,6 +56,35 @@ ${data.horoscope}`;
   }
 };
 
+const getDefinition = async (word) => {
+  try {
+    const url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${word}`;
+
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "7cc314b7fcmsh39f369b80d5a82bp1a6d4ajsn66a281a8d589",
+        "X-RapidAPI-Host": "mashape-community-urban-dictionary.p.rapidapi.com",
+      },
+    };
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+    if (data.list.length > 0) {
+      const firstMatch = data.list[0];
+
+      return `Defination : ${firstMatch.definition}
+
+example: ${firstMatch.example}`;
+    }
+
+    return "Ye shabd ka meaning to bas sn bata sakti h!";
+  } catch (ex) {
+    console.log(ex);
+    return "Dal me kuch kala h. Hum dekhte h";
+  }
+};
+
 // const birthdays = new Map();
 // birthdays.set("Mohan", { month: "Jan", day: 26 });
 // birthdays.set("Mohan 1", { month: "Jun", day: 8 });
@@ -104,12 +133,23 @@ client.on("messageCreate", async (msg) => {
   }
 
   if (msg.content === "&inspire") {
+    console.log("test");
     const quote = await getQuote();
     const thought =
       foodForThoughts[Math.floor(Math.random() * foodForThoughts.length)];
     msg.channel.send(`${quote}
 
 ${thought}, ${msg.author.username}!`);
+  }
+
+  if (msg.content.toLowerCase().startsWith("&define")) {
+    const word = msg.content.split(" ")[1].toLowerCase();
+    const definition = await getDefinition(word);
+    if (definition) {
+      msg.channel.send(definition);
+    } else {
+      msg.channel.send("Kuch to gadbad h daya!");
+    }
   }
 
   if (msg.content.toLowerCase().startsWith("&remind")) {
