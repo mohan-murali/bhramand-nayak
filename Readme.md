@@ -59,6 +59,14 @@ use the &joke command to send a joke
 &joke
 ```
 
+### Get defination for a word
+
+Use the &define command followed by the word for which you want to know the meaning.
+
+```
+&define <word>
+```
+
 ### Get the list of commands
 
 Use the &halp command to get the list of commands you can use
