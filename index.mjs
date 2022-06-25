@@ -78,7 +78,7 @@ const getDefinition = async (word) => {
 example: ${firstMatch.example}`;
     }
 
-    return "Ye shabd ka meaning to bas sn bata sakti h!";
+    return "Is shabd ka arth to bas sn bata sakti h!";
   } catch (ex) {
     console.log(ex);
     return "Dal me kuch kala h. Hum dekhte h";
