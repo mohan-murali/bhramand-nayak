@@ -73,9 +73,17 @@ const getDefinition = async (word) => {
     if (data.list.length > 0) {
       const firstMatch = data.list[0];
 
-      return `Defination : ${firstMatch.definition}
+      if (firstMatch.example) {
+        return `Defination : ${firstMatch.definition
+          .replaceAll("[", "")
+          .replaceAll("]", "")}
 
-example: ${firstMatch.example}`;
+example: ${firstMatch.example.replaceAll("[", "").replaceAll("]", "")}`;
+      } else {
+        return `Defination : ${firstMatch.definition
+          .replaceAll("[", "")
+          .replaceAll("]", "")}`;
+      }
     }
 
     return "Is shabd ka arth to bas sn bata sakti h!";
