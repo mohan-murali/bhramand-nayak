@@ -67,6 +67,22 @@ Use the &define command followed by the word for which you want to know the mean
 &define <word>
 ```
 
+### Send a random dog picture
+
+use the &doggo command to send a random dog picture
+
+```
+&doggo
+```
+
+### Send a random cat picture
+
+use the &kitty command to send a random cat picture
+
+```
+&kitty
+```
+
 ### Get the list of commands
 
 Use the &halp command to get the list of commands you can use
