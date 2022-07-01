@@ -33,7 +33,7 @@ const foodForThoughts = [
   "Socho beta socho, yahi to sochne wali baat h",
 ];
 
-async function getQuote() {
+const getQuote = async () => {
   try {
     const res = await fetch("https://zenquotes.io/api/random");
     const data = await res.json();
@@ -42,7 +42,31 @@ async function getQuote() {
     console.log(ex);
     return "some error occured while fetching the quote";
   }
-}
+};
+
+const getDoggo = async () => {
+  try {
+    const res = await fetch("https://dog.ceo/api/breeds/image/random");
+    const data = await res.json();
+    return data.message;
+  } catch (ex) {
+    console.log(ex);
+    return "some error occured while fetching the doggo";
+  }
+};
+
+const getKitty = async () => {
+  try {
+    const res = await fetch(
+      "https://api.thecatapi.com/v1/images/search?limit=1&size=full"
+    );
+    const data = await res.json();
+    return data[0].url;
+  } catch (ex) {
+    console.log(ex);
+    return "some error occured while fetching the kitty";
+  }
+};
 
 const getHoroscope = async (sign) => {
   try {
@@ -148,6 +172,16 @@ client.on("messageCreate", async (msg) => {
     msg.channel.send(`${quote}
 
 ${thought}, ${msg.author.username}!`);
+  }
+
+  if (msg.content === "&doggo") {
+    const dog = await getDoggo();
+    msg.channel.send(dog);
+  }
+
+  if (msg.content === "&kitty") {
+    const cat = await getKitty();
+    msg.channel.send(cat);
   }
 
   if (msg.content.toLowerCase().startsWith("&define")) {
