@@ -300,6 +300,8 @@ Bhramand Nayak tumhari sahayta zarur karega
 &horoscope <sun sign> - to get todays horoscope for the given sun sign.
 &signs - to get the list of sun signs and the dates for the respective signs. You can find which sign you belong to using this command
 &define <word> - use this to get the meaning of the word.
+&doggo - to get a random dog picture
+&kitty - to get a random cat picture
     `;
 
     msg.channel.send(halp);
