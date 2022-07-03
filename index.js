@@ -120,6 +120,30 @@ ${data.horoscope}`;
   }
 };
 
+const getWeeklyHoroscope = async (sign) => {
+  try {
+    const res = await fetch(`https://discordtest.mohan28.repl.co/week/${sign}`);
+    const data = await res.json();
+    return data.data;
+  } catch (ex) {
+    console.log(ex);
+    return "Dal me kuch kala h. Hum dekhte h";
+  }
+};
+
+const getMonthlyHoroscope = async (sign) => {
+  try {
+    const res = await fetch(
+      `https://discordtest.mohan28.repl.co/month/${sign}`
+    );
+    const data = await res.json();
+    return data.data;
+  } catch (ex) {
+    console.log(ex);
+    return "Dal me kuch kala h. Hum dekhte h";
+  }
+};
+
 const getDefinition = async (word) => {
   try {
     const url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${word}`;
@@ -316,10 +340,22 @@ ${thought}, ${msg.author.username}!`);
   } else if (msg.content.toLowerCase().startsWith("&horoscope")) {
     const sign = msg.content.split(" ")[1].toLowerCase();
 
+    const type = msg.content.split(" ")[2].toLowerCase();
+
     const allSigns = sunSigns.map((x) => x.name);
     if (allSigns.includes(sign)) {
-      const horoscope = await getHoroscope(sign);
-      msg.channel.send(horoscope);
+      if (type) {
+        if (type === "month") {
+          const horoscope = await getMonthlyHoroscope(sign);
+          msg.channel.send(horoscope);
+        } else if (type === "week") {
+          const horoscope = await getWeeklyHoroscope(sign);
+          msg.channel.send(horoscope);
+        }
+      } else {
+        const horoscope = await getHoroscope(sign);
+        msg.channel.send(horoscope);
+      }
     } else {
       msg.channel.send("Aisa koi sign ni hota, murakh");
     }
@@ -342,6 +378,8 @@ Bhramand Nayak tumhari sahayta zarur karega
 &status - to know the status of the bot
 &remind - set a reminder. Use the format &remind <@person> <number> <duration> <reminder message>. for setting a duration, use s for second, m for minute, h for hour and d for days. Sample - &remind @mohan 1 s you forgot to write help command !
 &horoscope <sun sign> - to get todays horoscope for the given sun sign.
+&horoscope <sun sign> week - to get todays horoscope for the given sun sign for that week.
+&horoscope <sun sign> month - to get todays horoscope for the given sun sign for that month.
 &signs - to get the list of sun signs and the dates for the respective signs. You can find which sign you belong to using this command
 &define <word> - use this to get the meaning of the word.
 &doggo - to get a random dog picture
