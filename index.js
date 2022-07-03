@@ -340,15 +340,16 @@ ${thought}, ${msg.author.username}!`);
   } else if (msg.content.toLowerCase().startsWith("&horoscope")) {
     const sign = msg.content.split(" ")[1].toLowerCase();
 
-    const type = msg.content.split(" ")[2].toLowerCase();
+    const type = msg.content.split(" ")[2];
 
+    console.log(type);
     const allSigns = sunSigns.map((x) => x.name);
     if (allSigns.includes(sign)) {
       if (type) {
-        if (type === "month") {
+        if (type.toLowerCase() === "month") {
           const horoscope = await getMonthlyHoroscope(sign);
           msg.channel.send(horoscope);
-        } else if (type === "week") {
+        } else if (type.toLowerCase() === "week") {
           const horoscope = await getWeeklyHoroscope(sign);
           msg.channel.send(horoscope);
         } else {
