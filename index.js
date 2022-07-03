@@ -351,6 +351,8 @@ ${thought}, ${msg.author.username}!`);
         } else if (type === "week") {
           const horoscope = await getWeeklyHoroscope(sign);
           msg.channel.send(horoscope);
+        } else {
+          msg.channel.send("itna door to hum bhi ni soche h");
         }
       } else {
         const horoscope = await getHoroscope(sign);
