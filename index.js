@@ -33,6 +33,46 @@ const foodForThoughts = [
   "Socho beta socho, yahi to sochne wali baat h",
 ];
 
+const monkaImages = [
+  "https://c.tenor.com/6QKSWGbQV74AAAAC/monka-extreme.gif",
+  "https://c.tenor.com/7caHI0tFuTsAAAAM/pepe-sweat.gif",
+  "https://c.tenor.com/318_LsuAJtgAAAAC/monkax-feels-love-man.gif",
+  "https://c.tenor.com/X585bCgHw9MAAAAC/monka-scooter.gif",
+  "https://c.tenor.com/0ejkAIfiAb0AAAAM/pepedao-pepe.gif",
+  "https://c.tenor.com/L02qxaSU5SQAAAAM/pepe.gif",
+  "https://c.tenor.com/6pS6W91lRMAAAAAM/monka-walk-away-monka.gif",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1WeQlTbGvpqFn8mqok6bNfdPF6zmyHE5eQ&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNNpKBnKVIcmMP5pGDjkxvDUmzfWfEg9HkWJuEYWTrsG6G3FDNKf-hyTX_Tgpx0dgUkBE&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgzpoOQCmSJpMOftNuEqH7sN71ZU1BXP3MtfCyAZb-fXJ4bzvqW0vw3kXVO4E5i_PwTng&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKXJcJ0sv6mNgzVVQ0yJTMPGCdxT4bNG3TKkqhQWble-B8KRXhxsWrJzz2v6CeoMxH8n4&usqp=CAU",
+  "https://cdn.dicionariopopular.com/imagens/monkamega.jpg",
+  "https://cdn.vox-cdn.com/thumbor/rxRdQlRmEhXPGiOTAoZeiMhluYM=/1400x0/filters:no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/10838149/poggers.jpg",
+  "https://ih1.redbubble.net/image.832742888.0963/st,small,507x507-pad,600x600,f8f8f8.u4.jpg",
+  "https://s3.getstickerpack.com/storage/uploads/sticker-pack/peepo-frog-emotes-4/tray.png",
+  "https://c.tenor.com/8kIoZ3dNzjcAAAAC/peepo-peepoblush.gif",
+  "https://c.tenor.com/JyrN6lMcJw8AAAAM/peepo-giggle.gif",
+  "https://i.pinimg.com/originals/e9/0c/b2/e90cb24349d868f9449d5b7ff0a0ccb8.gif",
+  "https://i.pinimg.com/originals/5d/ee/91/5dee91700de2b898f61260bea7322a5c.gif",
+  "https://i.pinimg.com/originals/ac/2a/ab/ac2aab4b58cd4472edcfd62bd4618177.gif",
+  "https://i.pinimg.com/originals/e5/8e/1f/e58e1f9a7444cdf86a45525b2d1e48a8.gif",
+  "https://c.tenor.com/5aF7np_zPEgAAAAM/pepe-why-pepe-the-frog.gif",
+  "https://www.icegif.com/wp-content/uploads/2021/10/icegif-1024.gif",
+  "https://i.pinimg.com/originals/24/80/3c/24803c9ff9de2275fde3bce8dff6f7a0.gif",
+  "https://i.kym-cdn.com/photos/images/original/000/890/568/082.gif",
+  "https://i.kym-cdn.com/photos/images/masonry/001/840/121/575.gif",
+  "https://i.kym-cdn.com/photos/images/newsfeed/002/057/990/a33.gif",
+  "https://c.tenor.com/OMmVm87NqZgAAAAM/wine-wine-time.gif",
+  "https://i.kym-cdn.com/photos/images/facebook/001/865/673/cc9.png",
+  "https://i.kym-cdn.com/photos/images/original/001/865/681/aac.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6V8XjXFh3E-EC6lQjnGzFl0b9DT4qKEvxAavyCv_1aj0bx7I7tSKPTzhnJtJcTrxLQWQ&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9o_uiGDt_R_JoOneJzdKcABQFfvcItDSvEUcBy1p0MnoKxiuXfacGUosueGcadCqFCSM&usqp=CAU",
+  "https://www.streamscheme.com/wp-content/uploads/2020/04/pepega.png.webp",
+  "https://c.tenor.com/64w8YOZ2Mm0AAAAM/pepe-pepeexit.gif",
+  "https://i.kym-cdn.com/photos/images/newsfeed/000/977/021/a14.jpg",
+  "https://c.tenor.com/7YSe06ToFRkAAAAC/eyes.gif",
+  "https://c.tenor.com/omEtcsBCRWQAAAAM/crazy-eyes-frog.gif",
+];
+
 const getQuote = async () => {
   try {
     const res = await fetch("https://zenquotes.io/api/random");
@@ -165,13 +205,17 @@ client.on("messageCreate", async (msg) => {
   }
 
   if (msg.content === "&inspire") {
-    console.log("test");
     const quote = await getQuote();
     const thought =
       foodForThoughts[Math.floor(Math.random() * foodForThoughts.length)];
     msg.channel.send(`${quote}
 
 ${thought}, ${msg.author.username}!`);
+  }
+
+  if (msg.content === "&monka") {
+    const monka = monkaImages[Math.floor(Math.random() * monkaImages.length)];
+    msg.channel.send(monka);
   }
 
   if (msg.content === "&doggo") {
@@ -302,6 +346,7 @@ Bhramand Nayak tumhari sahayta zarur karega
 &define <word> - use this to get the meaning of the word.
 &doggo - to get a random dog picture
 &kitty - to get a random cat picture
+&monka - to get a random monka picture
     `;
 
     msg.channel.send(halp);
