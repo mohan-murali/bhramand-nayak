@@ -437,6 +437,7 @@ Bhramand Nayak tumhari sahayta zarur karega
 &doggo - to get a random dog picture
 &kitty - to get a random cat picture
 &monka - to get a random monka picture
+&book <book name> - To get the book detail
     `;
 
     msg.channel.send(halp);
