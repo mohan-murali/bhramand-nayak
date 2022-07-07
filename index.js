@@ -1,4 +1,4 @@
-import { Client, Intents } from "discord.js";
+import { Client, Intents, MessageEmbed } from "discord.js";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 
@@ -144,6 +144,19 @@ const getMonthlyHoroscope = async (sign) => {
   }
 };
 
+const getBookDetail = async (name) => {
+  try {
+    const res = await fetch(
+      `https://discordtest.mohan28.repl.co/book?name=${name}`
+    );
+    const data = await res.json();
+    return data.data;
+  } catch (ex) {
+    console.log(ex);
+    return "Dal me kuch kala h. Hum dekhte h";
+  }
+};
+
 const getDefinition = async (word) => {
   try {
     const url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${word}`;
@@ -259,6 +272,42 @@ ${thought}, ${msg.author.username}!`);
       msg.channel.send(definition);
     } else {
       msg.channel.send("Kuch to gadbad h daya!");
+    }
+  }
+
+  if (msg.content.toLowerCase().startsWith("&book")) {
+    try {
+      const [_, ...remaining] = msg.content.split(" ");
+      const name = remaining.join("+");
+      const bookDetail = await getBookDetail(name);
+      console.log(bookDetail);
+      if (bookDetail !== "Result not found") {
+        const exampleEmbed = new MessageEmbed()
+          .setColor("#0099ff")
+          .setTitle(bookDetail.title)
+          .setAuthor({ name: bookDetail.author })
+          .setDescription(bookDetail.description)
+          .setThumbnail(bookDetail.coverImage)
+          .addFields(
+            {
+              name: "Page Number",
+              value: bookDetail.pageNumber,
+              inline: true,
+            },
+            { name: "Avg Ragting", value: bookDetail.avgRating, inline: true }
+          )
+          .setFooter({
+            text: "Inspired by Bookie",
+          });
+        msg.channel.send({ embeds: [exampleEmbed] });
+      } else {
+        msg.channel.send("Humko ye kitab ni dikh raha.");
+      }
+    } catch (e) {
+      msg.channel.send(
+        "An error has occured, please make sure the command has a time delimiter and message"
+      );
+      console.error(e.toString());
     }
   }
 
