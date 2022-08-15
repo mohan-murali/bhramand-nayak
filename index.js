@@ -265,6 +265,45 @@ ${thought}, ${msg.author.username}!`);
     msg.channel.send(cat);
   }
 
+  if (msg.content === "&emoji") {
+    console.log("this command is hit");
+    const message = await msg.channel.send(":smile:");
+    const time = 1000;
+    // const promiseA = new Promise((res) => res());
+    // promiseA
+    //   .then(
+    //     setTimeout(() => {
+    //       console.log("Delayed for 5 second.");
+    //       message.edit(":grin:");
+    //     }, 5000)
+    //   )
+    //   .then(() => {
+    //     setTimeout(() => {
+    //       console.log("delayed after 5 seconds");
+    //       message.edit(":smile:");
+    //     }, 5000);
+    //   });
+    // const wait = (time) => new Promise((res) => setTimeout(res(), time));
+    // await wait(100000);
+    // message.edit(":grin:");
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      if (i > 3) {
+        clearInterval(interval);
+      }
+      setTimeout(() => {
+        message.edit(":grin:");
+        setTimeout(() => {
+          message.edit(":laughing:");
+          setTimeout(() => {
+            message.edit(":smile:");
+          }, time);
+        }, time);
+      }, time);
+    }, time);
+  }
+
   if (msg.content.toLowerCase().startsWith("&define")) {
     const word = msg.content.split(" ")[1].toLowerCase();
     const definition = await getDefinition(word);
