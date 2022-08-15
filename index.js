@@ -321,6 +321,22 @@ ${thought}, ${msg.author.username}!`);
     // }, time);
   }
 
+  if (msg.content === "&blink") {
+    const message = await msg.channel.send(":smiley:");
+    const time = 500;
+    let i = 0;
+    const interval = setInterval(async () => {
+      i++;
+      if (i > 3) {
+        clearInterval(interval);
+      }
+      await wait(time);
+      message.edit(":laughing:");
+      await wait(time);
+      message.edit(":smiley:");
+    }, time);
+  }
+
   if (msg.content.toLowerCase().startsWith("&define")) {
     const word = msg.content.split(" ")[1].toLowerCase();
     const definition = await getDefinition(word);
