@@ -73,6 +73,13 @@ const monkaImages = [
   "https://c.tenor.com/omEtcsBCRWQAAAAM/crazy-eyes-frog.gif",
 ];
 
+const wait = (time) =>
+  new Promise((res) => {
+    setTimeout(() => {
+      res();
+    }, time);
+  });
+
 const getQuote = async () => {
   try {
     const res = await fetch("https://zenquotes.io/api/random");
@@ -283,25 +290,35 @@ ${thought}, ${msg.author.username}!`);
     //       message.edit(":smile:");
     //     }, 5000);
     //   });
-    // const wait = (time) => new Promise((res) => setTimeout(res(), time));
-    // await wait(100000);
-    // message.edit(":grin:");
     let i = 0;
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       i++;
       if (i > 3) {
         clearInterval(interval);
       }
-      setTimeout(() => {
-        message.edit(":grin:");
-        setTimeout(() => {
-          message.edit(":laughing:");
-          setTimeout(() => {
-            message.edit(":smile:");
-          }, time);
-        }, time);
-      }, time);
+      await wait(time);
+      message.edit(":grin:");
+      await wait(time);
+      message.edit(":laughing:");
+      await wait(time);
+      message.edit(":smile:");
     }, time);
+    // let i = 0;
+    // const interval = setInterval(() => {
+    //   i++;
+    //   if (i > 3) {
+    //     clearInterval(interval);
+    //   }
+    //   setTimeout(() => {
+    //     message.edit(":grin:");
+    //     setTimeout(() => {
+    //       message.edit(":laughing:");
+    //       setTimeout(() => {
+    //         message.edit(":smile:");
+    //       }, time);
+    //     }, time);
+    //   }, time);
+    // }, time);
   }
 
   if (msg.content.toLowerCase().startsWith("&define")) {
