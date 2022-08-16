@@ -117,10 +117,38 @@ const getKitty = async () => {
 
 const getHoroscope = async (sign) => {
   try {
-    const res = await fetch(`https://ohmanda.com/api/horoscope/${sign}`);
+    const res = await fetch(`https://discordtest.mohan28.repl.co/day/${sign}`);
     const data = await res.json();
-    return `Horoscope for ${data.sign} on ${data.date} :
-${data.horoscope}`;
+    console.log(data);
+    return `Horoscope for ${sign} on ${data.data}`;
+  } catch (ex) {
+    console.log(ex);
+    return "Dal me kuch kala h. Hum dekhte h";
+  }
+};
+
+const getHoroscopeTomorrow = async (sign) => {
+  try {
+    const res = await fetch(
+      `https://discordtest.mohan28.repl.co/tomorrow/${sign}`
+    );
+    const data = await res.json();
+    console.log(data);
+    return `Horoscope for ${sign} on ${data.data}`;
+  } catch (ex) {
+    console.log(ex);
+    return "Dal me kuch kala h. Hum dekhte h";
+  }
+};
+
+const getHoroscopeYesterday = async (sign) => {
+  try {
+    const res = await fetch(
+      `https://discordtest.mohan28.repl.co/yesterday/${sign}`
+    );
+    const data = await res.json();
+    console.log(data);
+    return `Horoscope for ${sign} on ${data.data}`;
   } catch (ex) {
     console.log(ex);
     return "Dal me kuch kala h. Hum dekhte h";
@@ -463,7 +491,6 @@ ${thought}, ${msg.author.username}!`);
 
     const type = msg.content.split(" ")[2];
 
-    console.log(type);
     const allSigns = sunSigns.map((x) => x.name);
     if (allSigns.includes(sign)) {
       if (type) {
@@ -472,6 +499,12 @@ ${thought}, ${msg.author.username}!`);
           msg.channel.send(horoscope);
         } else if (type.toLowerCase() === "week") {
           const horoscope = await getWeeklyHoroscope(sign);
+          msg.channel.send(horoscope);
+        } else if (type.toLowerCase() === "tomorrow") {
+          const horoscope = await getHoroscopeTomorrow(sign);
+          msg.channel.send(horoscope);
+        } else if (type.toLowerCase() === "yesterday") {
+          const horoscope = await getHoroscopeYesterday(sign);
           msg.channel.send(horoscope);
         } else {
           msg.channel.send("itna door to hum bhi ni soche h");
@@ -492,7 +525,6 @@ ${prev}`,
       ""
     );
 
-    console.log(signs);
     msg.channel.send(signs);
   }
 
