@@ -352,17 +352,31 @@ ${thought}, ${msg.author.username}!`);
   if (msg.content === "&blink") {
     const message = await msg.channel.send(":smiley:");
     const time = 500;
-    let i = 0;
-    const interval = setInterval(async () => {
-      i++;
-      if (i > 3) {
-        clearInterval(interval);
-      }
-      await wait(time);
-      message.edit(":laughing:");
-      await wait(time);
-      message.edit(":smiley:");
-    }, time);
+    // let i = 0;
+    // const interval = setInterval(async () => {
+    //   i++;
+    //   if (i > 3) {
+    //     clearInterval(interval);
+    //   }
+    //   console.log("before first wait", Date.now());
+    //   // await wait(time);
+    //   console.log("before second wait", Date.now());
+    //   await message.edit(":laughing:");
+    //   // await wait(time);
+    //   console.log("before thrid wait", Date.now());
+    //   await message.edit(":smiley:");
+    //   console.log("before fourth wait", Date.now());
+    // }, 0);
+    for (let i = 0; i < 5; i++) {
+      // console.log("before first wait", Date.now());
+      // await wait(time);
+      // console.log("before first edit", Date.now());
+      await message.edit(":laughing:");
+      // console.log("before second wait", Date.now());
+      // await wait(time);
+      // console.log("before second edit", Date.now());
+      await message.edit(":smiley:");
+    }
   }
 
   if (msg.content.toLowerCase().startsWith("&define")) {
